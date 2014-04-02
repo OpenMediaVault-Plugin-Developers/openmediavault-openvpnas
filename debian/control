@@ -1,0 +1,11 @@
+Source: openmediavault-openvpnas
+Section: net
+Priority: optional
+Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+Build-Depends: debhelper (>= 9.0.0)
+Standards-Version: 3.9.3
+
+Package: openmediavault-openvpnas
+Architecture: all
+Depends: openmediavault (>= 0.6), openvpn-as, ${misc:Depends}
+Description: OpenVPNAS plugin for OpenMediaVault.

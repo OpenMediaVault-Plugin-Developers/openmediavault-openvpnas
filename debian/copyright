@@ -1,0 +1,12 @@
+Format: http://dep.debian.net/deps/dep5
+Upstream-Name: openmediavault-openvpnas
+
+Files: *
+Copyright: 2014 OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+License: GPL-3+
+
+Files: var/www/openmediavault/images/openvpnas.png
+       var/www/openmediavault/images/openvpnas.svg
+Copyright: IcoMoon <http://www.icomoon.io>
+IcoMoon <http://www.icomoon.io>
+License: CC BY 3.0
