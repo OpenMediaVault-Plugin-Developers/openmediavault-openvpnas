@@ -35,6 +35,6 @@ OMV.WorkspaceManager.registerPanel({
     id        : "admin",
     path      : "/service/openvpnas",
     text      : _("Admin"),
-    position  : 10,
+    position  : 20,
     className : "OMV.module.admin.service.openvpnas.Admin"
 });
