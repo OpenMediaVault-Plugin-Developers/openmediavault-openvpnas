@@ -34,7 +34,7 @@ Ext.define("OMV.module.admin.service.openvpnas.Admin", {
 OMV.WorkspaceManager.registerPanel({
     id        : "admin",
     path      : "/service/openvpnas",
-    text      : _("Admin"),
+    text      : _("Admin Web UI"),
     position  : 20,
     className : "OMV.module.admin.service.openvpnas.Admin"
 });
