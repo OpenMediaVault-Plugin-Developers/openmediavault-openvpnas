@@ -34,7 +34,8 @@ Ext.define("OMV.module.admin.diagnostic.log.plugin.OpenVPNAS", {
         sortable  : true,
         dataIndex : "date",
         stateId   : "date",
-        flex      : 1
+        flex      : 1,
+        renderer  : OMV.util.Format.localeTimeRenderer()
     },{
         text      : _("Event"),
         sortable  : true,

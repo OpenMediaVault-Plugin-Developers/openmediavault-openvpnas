@@ -133,9 +133,12 @@ $moduleMgr->registerModule(new OMVModuleOpenVPNAS());
 OMVLogFile::registerType("openvpnas", array(
     "filename" => "openvpnas.log",
     "filepath" => "/var/log/openvpnas.log",
-    "regex"    => "/(^(.*?)\s+(.*?))-\d+\s+(.*?)$/",
+    "regex"    => "/^(\d+-\d+-\d+\s+\d+:\d+:\d+[-\+]\d+)\s+\[.*\]\s+(.*)$/",
     "columns"  => array(
-        "date"  => 1,
-        "event" => 4
+        "date"  => array(
+            "index" => 1,
+            "func"  => create_function("\$v", "return strpdate(\$v, \"Y-m-d H:i:sO\");")
+        ),
+        "event" => 2
     )
 ));
