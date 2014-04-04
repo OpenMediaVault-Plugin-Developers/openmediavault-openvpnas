@@ -160,7 +160,7 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                           'Before you can login to the Admin Web UI you need to create a password for the admin user.  This is done above.' +
                           '</li>' +
                           '<li>' +
-                          'Now login by clicking on the Admin Web UI button on the Settings tab, or via <b>https://' + location.hostname + ':943/admin</b>, by entering <b>openvpn</b> and your <b>password</b>.' +
+                          'Now click on the Admin Web UI button on the Settings tab, or via <b>https://' + location.hostname + ':943/admin</b>, and login by entering <b>openvpn</b> and your <b>password</b>.' +
                           '</li>' +
                           '<li>' +
                           'Once logged in there are 3 settings we need to change.  In the left column under Configuration click on <b>Server Network Settings</b>.' +
