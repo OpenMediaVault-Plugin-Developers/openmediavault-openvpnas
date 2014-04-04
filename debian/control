@@ -7,5 +7,5 @@ Standards-Version: 3.9.3
 
 Package: openmediavault-openvpnas
 Architecture: all
-Depends: openmediavault (>= 0.6), openvpn-as (>= 2.0.5), ${misc:Depends}
+Depends: openmediavault (>= 0.5.42), openvpn-as (>= 2.0.5), ${misc:Depends}
 Description: OpenVPN Acess Server plugin for OpenMediaVault.
