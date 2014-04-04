@@ -56,19 +56,16 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
     {
         global $xmlConfig;
 
-        $object = $xmlConfig->get($this->getXPath());
+        $running = false;
 
-        if (is_null($object))
-            throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED,
-                $this->getXPath());
-
-        $initd = new OMVSysVInitScript($this->getName());
+        if(file_exists("/var/run/openvpnas.pid"))
+            $running = true;
 
         return array(
             "name"    => $this->getName(),
             "title"   => gettext("OpenVPN AS"),
             "enabled" => boolval($object["enable"]),
-            "running" => $initd->status() == 0
+            "running" => $running
         );
     }
 
