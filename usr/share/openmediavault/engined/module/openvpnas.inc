@@ -56,8 +56,12 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
     {
         global $xmlConfig;
 
-        $running = false;
+        $object = $xmlConfig->get($this->getXPath());
+        if (is_null($object))
+            throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED, $this->getXPath());
 
+        // If pid file exists assume daemon is running
+        $running = false;
         if(file_exists("/var/run/openvpnas.pid"))
             $running = true;
 
