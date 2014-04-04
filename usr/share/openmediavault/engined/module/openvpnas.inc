@@ -77,7 +77,7 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
      */
     public function applyConfig()
     {
-        $cmd = sprintf("sudo omv-mkconf %s setup 2>&1", $this->getName());
+        $cmd = sprintf("omv-mkconf %s 2>&1", $this->getName());
 
         if (0 !== $this->exec($cmd, $output))
             throw new OMVException(OMVErrorMsg::E_EXEC_FAILED,
@@ -129,12 +129,12 @@ $moduleMgr = &OMVModuleMgr::getInstance();
 $moduleMgr->registerModule(new OMVModuleOpenVPNAS());
 
 // Register new logfile type
-OMVLogFile::registerType("openvpnas",array(
+OMVLogFile::registerType("openvpnas", array(
     "filename" => "openvpnas.log",
     "filepath" => "/var/log/openvpnas.log",
-    "regex" => "/^\[(.*?)\]\s+(.*?)\..*?:\d+:\s+.*?:\s+(.*)$/",
-    "columns" => array(
-        "date" => array(
+    "regex"    => "/^\[(.*?)\]\s+(.*?)\..*?:\d+:\s+.*?:\s+(.*)$/",
+    "columns"  => array(
+        "date"  => array(
             "index" => 1,
             "func"  => create_function('$v', 'return strpdate($v,"Y/n/j G:i:s");')
         ),

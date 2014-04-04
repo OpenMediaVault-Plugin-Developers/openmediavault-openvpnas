@@ -24,8 +24,6 @@
 // require("js/omv/data/Store.js")
 // require("js/omv/data/Model.js")
 // require("js/omv/data/proxy/Rpc.js")
-// require("js/omv/workspace/window/plugin/ConfigObject.js")
-// require("js/omv/form/field/SharedFolderComboBox.js")
 
 /**
  * @class OMV.module.admin.service.openvpnas.Settings
@@ -94,63 +92,63 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                 handler : function() {
                     var link = 'https://' + location.hostname + ':943/admin';
                     window.open(link, '_blank');
-            },
+                },
                 margin  : "0 0 5 0"
             }]
-            },{
-                xtype   : "fieldset",
-                title   : _("Instructions"),
-                layout  : "fit",
-                items : [{
-                    border  : false,
-                    html    : 'When you enable the server you should be connected to OMV via http.  If you are connected via https your connection will be disrupted by the default server settings.'
-                            + '  In any case, if you cannot connect to OMV via http after installing the plugin connect to the Admin Web Ui at <b>https://ifpofyouromv:943/admin</b> until server configuration is complete.'
-                            + '</p>'
-                            + '<h3>Server Configuration</h3>'
-                            + '<ol>'
-                            + '<li>'
-                            + 'Before you can login to the Admin Web UI you need to create a password for the admin user.  This is done in command line by "<b>passwd openvpn</b>" then enter desired password.'
-                            + '</li>'
-                            + '<li>'
-                            + 'Now login by clicking on the Admin Web UI button on the Settings tab, or via <b>https://ifpofyouromv:943/admin</b>, by entering <b>openvpn</b> and your <b>password</b>.'
-                            + '</li>'
-                            + '<li>'
-                            + 'Once logged in there are 3 settings we need to change.  In the left column under Configuration click on <b>Server Network Settings</b>.'
-                            + '</li>'
-                            + '<li>'
-                            + 'The first item you need to enter is <b>Hostname or IP Address:</b>.  You need to put the <b>WAN IP</b> of your OMV here.  You can obtain your WAN IP via this site <b>http://www.whatismyip.com</b>.  If you are using a <b>xxx.dyndns.org</b> type address to reach you home network you can substitute that address for dynamic ips.'
-                            + '</li>'
-                            + '<li>'
-                            + 'The second item needs to be adjusted.  Under <b>Protocol</b> put a bullet in <b>UDP</b> and make the <b>Port number: 1194</b>.'
-                            + '</li>'
-                            + '<li>'
-                            + 'For the last item you need to scroll to the bottom of the page and put check mark in <b>Disable SSLv2 Support</b>.'
-                            + '</li>'
-                            + '<li>'
-                            + 'Now click on <b>Save Settings</b>.  The OpenVPN Access Server should now be ready for use with OMV.'
-                            + '</li>'
-                            + '</ol>'
-                            + '<h3>Router and Firewall Settings</h3>'
-                            + '<ol>'
-                            + '<li>'
-                            + 'You need to forward <b>Port 1194 UDP</b> and <b>Port 943 TCP</b> from your router to your OMV.'
-                            + '</li>'
-                            + '<li>'
-                            + 'If you are using the firewall on your OMV you need to create rules to open <b>Port 1194 UDP</b> and <b>Port 943 TCP</b>.'
-                            + '</li>'
-                            + '<li>'
-                            + 'Port 943 TCP must remain open even after client software installation.  The VPN connection uses both ports.'
-                            + '</li>'
-                            + '</ol>'
-                            + '<h3>Client Software Installation and VPN Connection</h3>'
-                            + '<ol>'
-                            + '<li>'
-                            + 'Connect at <b>https://wanipofyouromv:943</b> and sign in with an OMV UserID and Password.  Then click the <b>Go</b> button.  Any OMV user will be allowed unless you have put a check mark on <b>Deny access to all users not listed above</b> in the Users Permissions section of the Admin Web UI. '
-                            + '</li>'
-                            + '<li>'
-                            + 'Once connected you will be prompted to download and install the Connect Client software.  Download it and install.  Once installed the VPN connection should auto-connect.  If it does not you can right click on the icon in the system tray and click on connect.'
-                            + '</li>'
-                            + '</ol>'
+        },{
+            xtype   : "fieldset",
+            title   : _("Instructions"),
+            layout  : "fit",
+            items : [{
+                border  : false,
+                html    : 'When you enable the server you should be connected to OMV via http.  If you are connected via https your connection will be disrupted by the default server settings.'
+                        + '  In any case, if you cannot connect to OMV via http after installing the plugin connect to the Admin Web Ui at <b>https://ifpofyouromv:943/admin</b> until server configuration is complete.'
+                        + '</p>'
+                        + '<h3>Server Configuration</h3>'
+                        + '<ol>'
+                        + '<li>'
+                        + 'Before you can login to the Admin Web UI you need to create a password for the admin user.  This is done in command line by "<b>passwd openvpn</b>" then enter desired password.'
+                        + '</li>'
+                        + '<li>'
+                        + 'Now login by clicking on the Admin Web UI button on the Settings tab, or via <b>https://ifpofyouromv:943/admin</b>, by entering <b>openvpn</b> and your <b>password</b>.'
+                        + '</li>'
+                        + '<li>'
+                        + 'Once logged in there are 3 settings we need to change.  In the left column under Configuration click on <b>Server Network Settings</b>.'
+                        + '</li>'
+                        + '<li>'
+                        + 'The first item you need to enter is <b>Hostname or IP Address:</b>.  You need to put the <b>WAN IP</b> of your OMV here.  You can obtain your WAN IP via this site <b>http://www.whatismyip.com</b>.  If you are using a <b>xxx.dyndns.org</b> type address to reach you home network you can substitute that address for dynamic ips.'
+                        + '</li>'
+                        + '<li>'
+                        + 'The second item needs to be adjusted.  Under <b>Protocol</b> put a bullet in <b>UDP</b> and make the <b>Port number: 1194</b>.'
+                        + '</li>'
+                        + '<li>'
+                        + 'For the last item you need to scroll to the bottom of the page and put check mark in <b>Disable SSLv2 Support</b>.'
+                        + '</li>'
+                        + '<li>'
+                        + 'Now click on <b>Save Settings</b>.  The OpenVPN Access Server should now be ready for use with OMV.'
+                        + '</li>'
+                        + '</ol>'
+                        + '<h3>Router and Firewall Settings</h3>'
+                        + '<ol>'
+                        + '<li>'
+                        + 'You need to forward <b>Port 1194 UDP</b> and <b>Port 943 TCP</b> from your router to your OMV.'
+                        + '</li>'
+                        + '<li>'
+                        + 'If you are using the firewall on your OMV you need to create rules to open <b>Port 1194 UDP</b> and <b>Port 943 TCP</b>.'
+                        + '</li>'
+                        + '<li>'
+                        + 'Port 943 TCP must remain open even after client software installation.  The VPN connection uses both ports.'
+                        + '</li>'
+                        + '</ol>'
+                        + '<h3>Client Software Installation and VPN Connection</h3>'
+                        + '<ol>'
+                        + '<li>'
+                        + 'Connect at <b>https://wanipofyouromv:943</b> and sign in with an OMV UserID and Password.  Then click the <b>Go</b> button.  Any OMV user will be allowed unless you have put a check mark on <b>Deny access to all users not listed above</b> in the Users Permissions section of the Admin Web UI. '
+                        + '</li>'
+                        + '<li>'
+                        + 'Once connected you will be prompted to download and install the Connect Client software.  Download it and install.  Once installed the VPN connection should auto-connect.  If it does not you can right click on the icon in the system tray and click on connect.'
+                        + '</li>'
+                        + '</ol>'
             }]
         }];
     }
