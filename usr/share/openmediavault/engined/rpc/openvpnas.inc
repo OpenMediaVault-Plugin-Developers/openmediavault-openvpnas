@@ -40,6 +40,7 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
     public function initialize() {
         $this->registerMethod("getSettings");
         $this->registerMethod("setSettings");
+        $this->registerMethod("doChangePassword");
     }
 
     /**
@@ -105,6 +106,30 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
 
         return $object;
     }
+    
+    public function doChangePassword($params, $context) {
+        global $xmlConfig;
+
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, array( "role" => OMV_ROLE_ADMINISTRATOR ));
+
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, '{
+            "type"       : "object",
+            "properties" : {
+                "admin_pass" : { "type" : "string" }
+            }
+        }');
+
+        // create password file
+        $file = "/tmp/.openmediavault-openvpnas-pwd";
+        file_put_contents($file, $params['admin_pass']);
+
+        // change password
+        $cmd = "/usr/local/bin/change_openvpnas_pwd 2>&1";
+        if(0 !== $this->exec($cmd, $output))
+            throw new OMVException(OMVErrorMsg::E_EXEC_FAILED, $cmd, implode("\n", $output));
+    }    
 }
 
 // Register the RPC service.
