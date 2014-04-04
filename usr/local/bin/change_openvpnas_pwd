@@ -17,9 +17,6 @@
 
 set -e
 
-. /etc/default/openmediavault
-. /usr/share/openmediavault/scripts/helper-functions
-
 PWDFILE="/tmp/.openmediavault-openvpnas-pwd"
 USER="openvpn"
 
@@ -30,4 +27,4 @@ fi
 ADMINPW=`cat ${PWDFILE}`
 rm -f ${PWDFILE}
 
-echo "${ADMINPW}:${USER}" | chpasswd
+echo "${USER}:${ADMINPW}" | chpasswd
