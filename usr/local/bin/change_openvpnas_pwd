@@ -30,4 +30,4 @@ fi
 ADMINPW=`cat ${PWDFILE}`
 rm -f ${PWDFILE}
 
-echo -e "${ADMINPW}\n${ADMINPW}" | (passwd --stdin ${USER})
+echo "${ADMINPW}:${USER}" | chpasswd
