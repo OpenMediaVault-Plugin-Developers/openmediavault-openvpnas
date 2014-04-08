@@ -196,7 +196,7 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                           'Connect at <b>https://wanipofyouromv:943</b> and sign in with an OMV UserID and Password.  Then click the <b>Go</b> button.  Any OMV user will be allowed unless you have put a check mark on <b>Deny access to all users not listed above</b> in the Users Permissions section of the Admin Web UI.' +
                           '</li>' +
                           '<li>' +
-                          'Once connected you will be prompted to download and install the Connect Client software.  Download it and install.  Once installed the VPN connection should auto-connect.  If it does not you can right click on the icon in the system tray and click on connect.' +
+                          'Once connected you will be prompted to download and install the Connect Client software.  Download it and install.  After installation right click on the icon in the system tray and click on connect.  The client should establish a connection.  Autologin is not recommended.' +
                           '</li>' +
                           '</ol>'
             }]
