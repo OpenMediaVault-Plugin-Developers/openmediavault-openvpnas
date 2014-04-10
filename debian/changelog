@@ -1,3 +1,10 @@
+openmediavault-openvpnas (1.0.3) stable; urgency=low
+
+  * Update locales
+  * Update icon
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 10 Apr 2014 11:38:27 -0500
+
 openmediavault-openvpnas (1.0.2) unstable; urgency=low
 
   * Initial release
