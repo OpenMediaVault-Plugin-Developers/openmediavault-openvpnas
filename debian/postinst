@@ -21,6 +21,9 @@ case "$1" in
         fi
 
         service rsyslog restart
+
+        dpkg-trigger update-fixperms
+        dpkg-trigger update-locale
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
@@ -31,7 +34,5 @@ case "$1" in
         exit 1
     ;;
 esac
-
-#DEBHELPER#
 
 exit 0
