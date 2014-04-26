@@ -153,7 +153,6 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                 border  : false,
                 html    : 'When you enable the server you should be connected to OMV via http.  If you are connected via https your connection will be disrupted by the default server settings.' +
                           '  In any case, if you cannot connect to OMV via http after installing the plugin connect to the Admin Web Ui at <b>https://' + location.hostname + ':943/admin</b> until server configuration is complete.' +
-                          '</p>' +
                           '<h3>Server Configuration</h3>' +
                           '<ol>' +
                           '<li>' +
