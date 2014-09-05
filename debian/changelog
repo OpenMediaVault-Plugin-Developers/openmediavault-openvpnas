@@ -1,3 +1,10 @@
+openmediavault-openvpnas (1.0.4) UNRELEASED; urgency=medium
+
+  * Get hostname via rpc
+  * Update locales
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 04 Sep 2014 21:00:33 -0500
+
 openmediavault-openvpnas (1.0.3) stable; urgency=low
 
   * Update locales
