@@ -90,7 +90,18 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                 text    : _("Admin Web UI"),
                 scope   : this,
                 handler : function() {
-                    var link = 'https://' + location.hostname + ':943/admin';
+                    OMV.Rpc.request({
+                        scope    : this,
+                        callback : function(id, success, response) {
+                            var link = "https://" + response.hostname + ":943/admin";
+                            window.open(link, '_blank');
+                        },
+                        relayErrors : false,
+                        rpcData     : {
+                            service  : "Network",
+                            method   : "getGeneralSettings"
+                        }
+                    });
                     window.open(link, '_blank');
                 },
                 margin  : "0 0 5 0"
