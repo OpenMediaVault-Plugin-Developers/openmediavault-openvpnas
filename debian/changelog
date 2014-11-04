@@ -1,3 +1,10 @@
+openmediavault-openvpnas (1.0.5) stable; urgency=low
+
+  * Move web interface button to toolbar
+  * Fix plugin purge
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 04 Nov 2014 07:12:05 -0600
+
 openmediavault-openvpnas (1.0.4) stable; urgency=low
 
   * Get hostname via rpc
