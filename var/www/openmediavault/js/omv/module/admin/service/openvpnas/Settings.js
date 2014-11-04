@@ -35,16 +35,16 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
     rpcService   : "OpenVPNAS",
     rpcGetMethod : "getSettings",
     rpcSetMethod : "setSettings",
-    plugins      : [{
+
+    plugins : [{
         ptype        : "linkedfields",
         correlations : [{
-            name       : [
-                "openmanage"
+            conditions  : [
+                { name : "enable", value : true }
             ],
-            conditions : [
-                { name  : "enable", value : false }
-            ],
-            properties : "disabled"
+            properties : function(valid, field) {
+                this.setButtonDisabled("openmanage", !valid);
+            }
         }]
     }],
 
@@ -69,6 +69,25 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
         me.callParent(arguments);
     },
 
+    getButtonItems : function() {
+        var me = this;
+        var items = me.callParent(arguments);
+        items.push({
+            id       : me.getId() + "-openmanage",
+            xtype    : "button",
+            text     : _("Admin Web UI"),
+            icon     : "images/openvpnas.png",
+            iconCls  : Ext.baseCSSPrefix + "btn-icon-16x16",
+            disabled : true,
+            scope    : me,
+            handler  : function() {
+                    var link = 'https://' + location.hostname + ':943/admin';
+                    window.open(link, '_blank');
+                }
+        });
+        return items;
+    },
+
     getFormItems: function () {
         return [{
             xtype : "fieldset",
@@ -84,27 +103,6 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                 fieldLabel : _("Enable"),
                 boxLabel   : _("Show tab with Admin Web UI."),
                 checked    : false
-            },{
-                xtype   : "button",
-                name    : "openmanage",
-                text    : _("Admin Web UI"),
-                scope   : this,
-                handler : function() {
-                    OMV.Rpc.request({
-                        scope    : this,
-                        callback : function(id, success, response) {
-                            var link = "https://" + response.hostname + ":943/admin";
-                            window.open(link, '_blank');
-                        },
-                        relayErrors : false,
-                        rpcData     : {
-                            service  : "Network",
-                            method   : "getGeneralSettings"
-                        }
-                    });
-                    window.open(link, '_blank');
-                },
-                margin  : "0 0 5 0"
             }]
         },{
             xtype : "fieldset",
@@ -164,6 +162,7 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                 border  : false,
                 html    : 'When you enable the server you should be connected to OMV via http.  If you are connected via https your connection will be disrupted by the default server settings.' +
                           '  In any case, if you cannot connect to OMV via http after installing the plugin connect to the Admin Web Ui at <b>https://' + location.hostname + ':943/admin</b> until server configuration is complete.' +
+                          '</p>' +
                           '<h3>Server Configuration</h3>' +
                           '<ol>' +
                           '<li>' +
@@ -176,7 +175,7 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                           'Once logged in there are 3 settings we need to change.  In the left column under Configuration click on <b>Server Network Settings</b>.' +
                           '</li>' +
                           '<li>' +
-                          'The first item you need to enter is <b>Hostname or IP Address:</b>.  You need to put the <b>WAN IP</b> of your OMV here.  You can obtain your WAN IP by clicking <a href="http://www.whatismyip.com" target="_blank">here</a>.  If you are using a <b>xxx.dyndns.org</b> type address to reach your home network you can substitute that address for Dynamic IPs.' +
+                          'The first item you need to enter is <b>Hostname or IP Address:</b>.  In this field you need to put the <b>WAN IP</b> of your OMV.  You can obtain your WAN IP by clicking <a href="http://www.whatismyip.com" target="_blank">here</a>.  If you are using a <b>xxx.dyndns.org</b> type address to reach you home network you can substitute that address for dynamic ips.' +
                           '</li>' +
                           '<li>' +
                           'The second item needs to be adjusted.  Under <b>Protocol</b> put a bullet in <b>UDP</b> and make the <b>Port number: 1194</b>.' +
