@@ -175,7 +175,7 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                           'Once logged in there are 3 settings we need to change.  In the left column under Configuration click on <b>Server Network Settings</b>.' +
                           '</li>' +
                           '<li>' +
-                          'The first item you need to enter is <b>Hostname or IP Address:</b>.  In this field you need to put the <b>WAN IP</b> of your OMV.  You can obtain your WAN IP by clicking <a href="http://www.whatismyip.com" target="_blank">here</a>.  If you are using a <b>xxx.dyndns.org</b> type address to reach you home network you can substitute that address for dynamic ips.' +
+                          'The first item you need to enter is <b>Hostname or IP Address:</b>.  In this field you need to put the <b>WAN IP</b> of your OMV.  You can obtain your WAN IP by clicking <a href="http://www.whatismyip.com" target="_blank">here</a>.  If you are using a <b>xxx.dyndns.org</b> type address to reach your home network you can substitute that address for dynamic ips.' +
                           '</li>' +
                           '<li>' +
                           'The second item needs to be adjusted.  Under <b>Protocol</b> put a bullet in <b>UDP</b> and make the <b>Port number: 1194</b>.' +
