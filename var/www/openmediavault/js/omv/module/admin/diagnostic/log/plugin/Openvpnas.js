@@ -24,6 +24,7 @@
 
 Ext.define("OMV.module.admin.diagnostic.log.plugin.OpenVPNAS", {
     extend : "OMV.module.admin.diagnostic.log.plugin.Plugin",
+    alias: "omv.plugin.diagnostic.log.openvpnas",
 
     id       : "openvpnas",
     text     : _("OpenVPN AS"),
@@ -49,10 +50,4 @@ Ext.define("OMV.module.admin.diagnostic.log.plugin.OpenVPNAS", {
         { name : "date", type : "string" },
         { name : "event", type : "string" }
     ]
-});
-
-OMV.PluginManager.register({
-    ptype     : "diagnostic",
-    id        : "log",
-    className : "OMV.module.admin.diagnostic.log.plugin.OpenVPNAS"
 });
