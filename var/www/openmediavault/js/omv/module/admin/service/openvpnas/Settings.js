@@ -181,7 +181,7 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                           'The second item needs to be adjusted.  Under <b>Protocol</b> put a bullet in <b>UDP</b> and make the <b>Port number: 1194</b>.' +
                           '</li>' +
                           '<li>' +
-                          'For the last item you need to scroll to the bottom of the page and put check mark in <b>Disable SSLv2 Support</b>.' +
+                          'For the last item go to Configuration, SSL Settings and put bullets in <b>TLS 1.2</b> for the OpenVPN and Web Server.' +
                           '</li>' +
                           '<li>' +
                           'Now click on <b>Save Settings</b>.  The OpenVPN Access Server should now be ready for use with OMV.' +
