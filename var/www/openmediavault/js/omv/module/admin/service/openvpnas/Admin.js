@@ -20,10 +20,6 @@
  */
 // require("js/omv/WorkspaceManager.js")
 // require("js/omv/workspace/panel/Panel.js")
-// require("js/omv/Rpc.js")
-// require("js/omv/data/Store.js")
-// require("js/omv/data/Model.js")
-// require("js/omv/data/proxy/Rpc.js")
 
 Ext.define("OMV.module.admin.service.openvpnas.Admin", {
     extend : "OMV.workspace.panel.Panel",
@@ -31,19 +27,9 @@ Ext.define("OMV.module.admin.service.openvpnas.Admin", {
     initComponent : function() {
         var me = this;
 
-        OMV.Rpc.request({
-            scope    : this,
-            callback : function(id, success, response) {
-                var link = "https://" + response.hostname + ":943/admin";
-                me.html = "<iframe src='" + link + "' sandbox='allow-same-origin allow-forms allow-scripts' width='100%' height='100%' />";
-            },
-            relayErrors : false,
-            rpcData     : {
-                service  : "Network",
-                method   : "getGeneralSettings"
-            }
-        });
+        var link = 'https://' + location.hostname + ':943/admin';
 
+        me.html = "<iframe src='" + link + "' width='100%' height='100%' />";
         me.callParent(arguments);
     }
 });
