@@ -172,7 +172,7 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                           'Now click on the Admin Web UI button on the Settings tab, or via <b>https://' + location.hostname + ':943/admin</b>, and login by entering <b>openvpn</b> and your <b>password</b>.' +
                           '</li>' +
                           '<li>' +
-                          'Once logged in there are 3 settings we need to change.  In the left column under Configuration click on <b>Server Network Settings</b>.' +
+                          'Once logged in there are 4 settings we need to change.  In the left column under Configuration click on <b>Server Network Settings</b>.' +
                           '</li>' +
                           '<li>' +
                           'The first item you need to enter is <b>Hostname or IP Address:</b>.  In this field you need to put the <b>WAN IP</b> of your OMV.  You can obtain your WAN IP by clicking <a href="http://www.whatismyip.com" target="_blank">here</a>.  If you are using a <b>xxx.dyndns.org</b> type address to reach your home network you can substitute that address for dynamic ips.' +
@@ -181,7 +181,7 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
                           'The second item needs to be adjusted.  Under <b>Protocol</b> put a bullet in <b>UDP</b> and make the <b>Port number: 1194</b>.' +
                           '</li>' +
                           '<li>' +
-                          'For the last item go to Configuration, SSL Settings and put bullets in <b>TLS 1.2</b> for the OpenVPN and Web Server.' +
+                          'For the last two items go to <b>Configuration, SSL Settings</b>.  Put a bullet in <b>Default</b> for the <b>OpenVPN</b> and one in <b>TLS 1.2</b> for the <b>Web Server</b>.' +
                           '</li>' +
                           '<li>' +
                           'Now click on <b>Save Settings</b>.  The OpenVPN Access Server should now be ready for use with OMV.' +
