@@ -39,6 +39,9 @@ Ext.define("OMV.module.admin.service.openvpnas.Settings", {
     plugins : [{
         ptype        : "linkedfields",
         correlations : [{
+            name        : [
+                "enable"
+            ],
             conditions  : [
                 { name : "enable", value : true }
             ],
