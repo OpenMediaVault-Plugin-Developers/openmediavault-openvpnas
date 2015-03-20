@@ -4,7 +4,7 @@
  * @author    Volker Theile <volker.theile@openmediavault.org>
  * @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
  * @copyright Copyright (c) 2009-2013 Volker Theile
- * @copyright Copyright (c) 2013-2014 OpenMediaVault Plugin Developers
+ * @copyright Copyright (c) 2013-2015 OpenMediaVault Plugin Developers
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -126,7 +126,7 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
         file_put_contents($file, $params['admin_pass']);
 
         // change password
-        $cmd = "/usr/local/bin/change_openvpnas_pwd 2>&1";
+        $cmd = "/usr/sbin/change_openvpnas_pwd 2>&1";
         if(0 !== $this->exec($cmd, $output))
             throw new OMVException(OMVErrorMsg::E_EXEC_FAILED, $cmd, implode("\n", $output));
     }    
@@ -135,4 +135,3 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
 // Register the RPC service.
 $rpcServiceMgr = &OMVRpcServiceMgr::getInstance();
 $rpcServiceMgr->registerService(new OMVRpcServiceOpenVPNAS());
-?>
