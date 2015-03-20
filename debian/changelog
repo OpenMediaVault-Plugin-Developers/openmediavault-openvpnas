@@ -1,3 +1,9 @@
+openmediavault-openvpnas (1.0.9) stable; urgency=low
+
+  * Fix web client button
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 20 Mar 2015 07:02:58 -0500
+
 openmediavault-openvpnas (1.0.8) stable; urgency=low
 
   * Update instructions
