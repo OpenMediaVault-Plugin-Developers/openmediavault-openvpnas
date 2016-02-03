@@ -57,18 +57,19 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
         global $xmlConfig;
 
         $object = $xmlConfig->get($this->getXPath());
-
         if (is_null($object))
-            throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED,
-                $this->getXPath());
+            throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED, $this->getXPath());
 
-        $initd = new OMVSysVInitScript($this->getName());
+        // If pid file exists assume daemon is running
+        $running = false;
+        if(file_exists("/var/run/openvpnas.pid"))
+            $running = true;
 
         return array(
             "name"    => $this->getName(),
             "title"   => gettext("OpenVPN AS"),
             "enabled" => boolval($object["enable"]),
-            "running" => $initd->status() == 0
+            "running" => $running
         );
     }
 
@@ -77,7 +78,7 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
      */
     public function applyConfig()
     {
-        $cmd = sprintf("sudo omv-mkconf %s setup 2>&1", $this->getName());
+        $cmd = sprintf("omv-mkconf %s 2>&1", $this->getName());
 
         if (0 !== $this->exec($cmd, $output))
             throw new OMVException(OMVErrorMsg::E_EXEC_FAILED,
@@ -129,14 +130,14 @@ $moduleMgr = &OMVModuleMgr::getInstance();
 $moduleMgr->registerModule(new OMVModuleOpenVPNAS());
 
 // Register new logfile type
-OMVLogFile::registerType("openvpnas",array(
+OMVLogFile::registerType("openvpnas", array(
     "filename" => "openvpnas.log",
     "filepath" => "/var/log/openvpnas.log",
-    "regex" => "/^\[(.*?)\]\s+(.*?)\..*?:\d+:\s+.*?:\s+(.*)$/",
-    "columns" => array(
-        "date" => array(
+    "regex"    => "/^(\d+-\d+-\d+\s+\d+:\d+:\d+[-\+]\d+)\s+\[.*\]\s+(.*)$/",
+    "columns"  => array(
+        "date"  => array(
             "index" => 1,
-            "func"  => create_function('$v', 'return strpdate($v,"Y/n/j G:i:s");')
+            "func"  => create_function("\$v", "return strpdate(\$v, \"Y-m-d H:i:sO\");")
         ),
         "event" => 2
     )

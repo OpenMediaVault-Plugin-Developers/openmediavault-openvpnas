@@ -17,6 +17,13 @@ case "$1" in
         if getent group openvpnas >/dev/null 2>&1; then
             groupdel openvpnas
         fi
+
+        if getent passwd openvpn >/dev/null 2>&1; then
+            userdel openvpn
+        fi
+
+        rm -rf /usr/local/openvpn_as
+
     ;;
 
     remove)

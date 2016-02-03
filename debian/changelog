@@ -1,5 +1,56 @@
-openmediavault-openvpn (1.0.0) UNRELEASED; urgency=low
+openmediavault-openvpnas (1.0.10) stable; urgency=low
+
+  * Fix typo
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 20 Mar 2015 10:12:39 -0500
+
+openmediavault-openvpnas (1.0.9) stable; urgency=low
+
+  * Fix web client button
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 20 Mar 2015 07:02:58 -0500
+
+openmediavault-openvpnas (1.0.8) stable; urgency=low
+
+  * Update instructions
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 23 Jan 2015 17:12:55 -0600
+
+openmediavault-openvpnas (1.0.7) stable; urgency=low
+
+  * Fix admin link
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 06 Dec 2014 11:29:32 -0600
+
+openmediavault-openvpnas (1.0.6) stable; urgency=low
+
+  * Minor fixes
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 06 Dec 2014 08:03:19 -0600
+
+openmediavault-openvpnas (1.0.5) stable; urgency=low
+
+  * Move web interface button to toolbar
+  * Fix plugin purge
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 04 Nov 2014 07:12:05 -0600
+
+openmediavault-openvpnas (1.0.4) stable; urgency=low
+
+  * Get hostname via rpc
+  * Update locales
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 05 Sep 2014 20:13:40 -0500
+
+openmediavault-openvpnas (1.0.3) stable; urgency=low
+
+  * Update locales
+  * Update icon
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 10 Apr 2014 11:38:27 -0500
+
+openmediavault-openvpnas (1.0.2) unstable; urgency=low
 
   * Initial release
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 02 Apr 2014 12:00:00 +0100
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 04 Apr 2014 15:07:27 -0500

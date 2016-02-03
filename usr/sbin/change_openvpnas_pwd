@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright (C) 2013-2014 OpenMediaVault Plugin Developers
 #
@@ -17,10 +17,14 @@
 
 set -e
 
-. /etc/default/openmediavault
-. /usr/share/openmediavault/scripts/helper-functions
+PWDFILE="/tmp/.openmediavault-openvpnas-pwd"
+USER="openvpn"
 
-# Enable/disable service
-if [ "$(omv_config_get "//services/openvpnas/enable")" != "1" ]; then
-    exit 0
+if [ ! -f ${PWDFILE} ]; then
+    exit 2
 fi
+
+ADMINPW=`cat ${PWDFILE}`
+rm -f ${PWDFILE}
+
+echo "${USER}:${ADMINPW}" | chpasswd

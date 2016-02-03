@@ -18,26 +18,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-// require("js/omv/WorkspaceManager.js")
-// require("js/omv/workspace/panel/Panel.js")
+// require("js/omv/PluginManager.js")
+// require("js/omv/module/admin/diagnostic/log/plugin/Plugin.js")
+// require("js/omv/util/Format.js")
 
-Ext.define("OMV.module.admin.service.openvpnas.Admin", {
-    extend : "OMV.workspace.panel.Panel",
+Ext.define("OMV.module.admin.diagnostic.log.plugin.OpenVPNAS", {
+    extend : "OMV.module.admin.diagnostic.log.plugin.Plugin",
+    alias: "omv.plugin.diagnostic.log.openvpnas",
 
-    initComponent : function() {
-        var me = this;
-
-        var link = 'https://' + location.hostname + ':943/admin';
-
-        me.html = "<iframe src='" + link + "' width='100%' height='100%' />";
-        me.callParent(arguments);
-    }
-});
-
-OMV.WorkspaceManager.registerPanel({
-    id        : "admin",
-    path      : "/service/openvpnas",
-    text      : _("Admin Web UI"),
-    position  : 20,
-    className : "OMV.module.admin.service.openvpnas.Admin"
+    id       : "openvpnas",
+    text     : _("OpenVPN AS"),
+    stateful : true,
+    stateId  : "51bdf193-e76a-481e-b2c0-13ab358c93c0",
+    columns  : [{
+        text      : _("Date & Time"),
+        sortable  : true,
+        dataIndex : "date",
+        stateId   : "date",
+        renderer  : OMV.util.Format.localeTimeRenderer()
+    },{
+        text      : _("Event"),
+        sortable  : true,
+        dataIndex : "event",
+        stateId   : "event",
+        flex      : 1
+    }],
+    rpcParams : {
+        id : "openvpnas"
+    },
+    rpcFields : [
+        { name : "date", type : "string" },
+        { name : "event", type : "string" }
+    ]
 });
