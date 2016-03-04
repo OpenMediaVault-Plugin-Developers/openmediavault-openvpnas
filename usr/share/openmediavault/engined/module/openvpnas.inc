@@ -1,7 +1,8 @@
 <?php
-
 /**
- * Copyright (C) 2014 OpenMediaVault Plugin Developers
+ * @license   http://www.gnu.org/licenses/gpl.html GPL Version 3
+ * @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+ * @copyright Copyright (C) 2014-2016 OpenMediaVault Plugin Developers
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +22,7 @@ require_once "openmediavault/module.inc";
 require_once "openmediavault/config.inc";
 require_once "openmediavault/error.inc";
 require_once "openmediavault/util.inc";
-require_once "openmediavault/initscript.inc";
+require_once "openmediavault/systemctl.inc";
 require_once "openmediavault/log.inc";
 
 class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
@@ -60,17 +61,13 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
         if (is_null($object))
             throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED, $this->getXPath());
 
-        // If pid file exists assume daemon is running
-        $running = false;
-        if(file_exists("/var/run/openvpnas.pid"))
-            $running = true;
-
-        return array(
+        $systemCtl = new OMVSystemCtl( $this->getName() );
+        return [
             "name"    => $this->getName(),
             "title"   => gettext("OpenVPN AS"),
             "enabled" => boolval($object["enable"]),
-            "running" => $running
-        );
+            "running" => $systemCtl->isActive(),
+        ];
     }
 
     /**
@@ -78,11 +75,11 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
      */
     public function applyConfig()
     {
-        $cmd = sprintf("omv-mkconf %s 2>&1", $this->getName());
+        $cmd = sprintf("export LANG=C; omv-mkconf %s 2>&1", $this->getName());
 
         if (0 !== $this->exec($cmd, $output))
             throw new OMVException(OMVErrorMsg::E_EXEC_FAILED,
-                $cmd, implode("\n", $output));
+                $cmd, implode(PHP_EOL, $output));
     }
 
     /**
@@ -101,8 +98,8 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
         if (!$object["enable"])
             return;
 
-        $initd = new OMVSysVInitScript($this->getName(), true);
-        $initd->exec();
+        $systemCtl = new OMVSystemCtl($this->getName(), true);
+        $systemCtl->enable(true);
     }
 
     /**
@@ -110,8 +107,8 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
      */
     public function stopService()
     {
-        $initd = new OMVSysVInitScript($this->getName());
-        $initd->exec();
+        $systemCtl = new OMVSystemCtl($this->getName());
+        $systemCtl->disable(true);
     }
 
     /**
@@ -119,7 +116,7 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
      */
     public function bindListeners(OMVNotifyDispatcher $dispatcher) {
         $dispatcher->addListener(
-            OMV_NOTIFY_CREATE | OMV_NOTIFY_MODIFY | OMV_NOTIFY_DELETE,
+            OMV_NOTIFY_MODIFY,
             $this->getEventMessagePath(),
             array($this, "setDirty"));
     }

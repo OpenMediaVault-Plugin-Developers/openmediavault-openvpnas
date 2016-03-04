@@ -1,10 +1,8 @@
 <?php
 /**
  * @license   http://www.gnu.org/licenses/gpl.html GPL Version 3
- * @author    Volker Theile <volker.theile@openmediavault.org>
  * @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
- * @copyright Copyright (c) 2009-2013 Volker Theile
- * @copyright Copyright (c) 2013-2015 OpenMediaVault Plugin Developers
+ * @copyright Copyright (c) 2013-2016 OpenMediaVault Plugin Developers
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +21,7 @@ require_once("openmediavault/object.inc");
 require_once("openmediavault/config.inc");
 require_once("openmediavault/error.inc");
 require_once("openmediavault/util.inc");
-require_once("openmediavault/rpcservice.inc");
+require_once("openmediavault/rpc.inc");
 require_once("openmediavault/notify.inc");
 
 class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
@@ -53,7 +51,7 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
     public function getSettings($params, $context) {
         global $xmlConfig;
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, array( "role" => OMV_ROLE_ADMINISTRATOR ));
+        $this->validateMethodContext($context, [ "role" => OMV_ROLE_ADMINISTRATOR ]);
 
         // Get the configuration object.
         $xpath = "//services/openvpnas";
@@ -79,7 +77,7 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
     public function setSettings($params, $context) {
         global $xmlConfig;
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, array( "role" => OMV_ROLE_ADMINISTRATOR ));
+        $this->validateMethodContext($context, [ "role" => OMV_ROLE_ADMINISTRATOR ]);
 
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, '{
@@ -111,7 +109,7 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
         global $xmlConfig;
 
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, array( "role" => OMV_ROLE_ADMINISTRATOR ));
+        $this->validateMethodContext($context, [ "role" => OMV_ROLE_ADMINISTRATOR ]);
 
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, '{
@@ -128,7 +126,7 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
         // change password
         $cmd = "/usr/sbin/change_openvpnas_pwd 2>&1";
         if(0 !== $this->exec($cmd, $output))
-            throw new OMVException(OMVErrorMsg::E_EXEC_FAILED, $cmd, implode("\n", $output));
+            throw new OMVException(OMVErrorMsg::E_EXEC_FAILED, $cmd, implode(PHP_EOL, $output));
     }    
 }
 

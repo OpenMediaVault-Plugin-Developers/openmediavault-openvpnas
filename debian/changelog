@@ -1,3 +1,9 @@
+openmediavault-openvpnas (3.0) stable; urgency=low
+
+  * Update for OMV 3.0 
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 03 Mar 2016 21:19:41 -0500
+
 openmediavault-openvpnas (1.0.10) stable; urgency=low
 
   * Fix typo
@@ -54,3 +60,4 @@ openmediavault-openvpnas (1.0.2) unstable; urgency=low
   * Initial release
 
  -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 04 Apr 2014 15:07:27 -0500
+
