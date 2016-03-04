@@ -1,5 +1,6 @@
 <?php
 /**
+ * @license   http://www.gnu.org/licenses/gpl.html GPL Version 3
  * @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
  * @copyright Copyright (C) 2014-2016 OpenMediaVault Plugin Developers
  *
