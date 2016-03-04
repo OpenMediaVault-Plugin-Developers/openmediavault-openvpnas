@@ -126,7 +126,7 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
         // change password
         $cmd = "/usr/sbin/change_openvpnas_pwd 2>&1";
         if(0 !== $this->exec($cmd, $output))
-            throw new OMVException(OMVErrorMsg::E_EXEC_FAILED, $cmd, implode("\n", $output));
+            throw new OMVException(OMVErrorMsg::E_EXEC_FAILED, $cmd, implode(PHP_EOL, $output));
     }    
 }
 
