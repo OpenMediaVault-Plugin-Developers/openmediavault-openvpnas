@@ -21,7 +21,7 @@ require_once("openmediavault/object.inc");
 require_once("openmediavault/config.inc");
 require_once("openmediavault/error.inc");
 require_once("openmediavault/util.inc");
-require_once("openmediavault/rpcservice.inc");
+require_once("openmediavault/rpc.inc");
 require_once("openmediavault/notify.inc");
 
 class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
@@ -51,7 +51,7 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
     public function getSettings($params, $context) {
         global $xmlConfig;
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, array( "role" => OMV_ROLE_ADMINISTRATOR ));
+        $this->validateMethodContext($context, [ "role" => OMV_ROLE_ADMINISTRATOR ]);
 
         // Get the configuration object.
         $xpath = "//services/openvpnas";
@@ -77,7 +77,7 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
     public function setSettings($params, $context) {
         global $xmlConfig;
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, array( "role" => OMV_ROLE_ADMINISTRATOR ));
+        $this->validateMethodContext($context, [ "role" => OMV_ROLE_ADMINISTRATOR ]);
 
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, '{
@@ -109,7 +109,7 @@ class OMVRpcServiceOpenVPNAS extends OMVRpcServiceAbstract {
         global $xmlConfig;
 
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, array( "role" => OMV_ROLE_ADMINISTRATOR ));
+        $this->validateMethodContext($context, [ "role" => OMV_ROLE_ADMINISTRATOR ]);
 
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, '{
