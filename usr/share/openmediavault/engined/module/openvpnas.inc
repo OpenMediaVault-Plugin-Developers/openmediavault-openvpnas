@@ -1,5 +1,6 @@
 <?php
 /**
+ * @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
  * @copyright Copyright (C) 2014-2016 OpenMediaVault Plugin Developers
  *
  * This program is free software: you can redistribute it and/or modify
