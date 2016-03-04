@@ -99,7 +99,7 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
             return;
 
         $systemCtl = new OMVSystemCtl($this->getName(), true);
-        $systemCtl->exec();
+        $systemCtl->enable(true);
     }
 
     /**
@@ -108,7 +108,7 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
     public function stopService()
     {
         $systemCtl = new OMVSystemCtl($this->getName());
-        $systemCtl->exec();
+        $systemCtl->disable(true);
     }
 
     /**
@@ -116,7 +116,7 @@ class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
      */
     public function bindListeners(OMVNotifyDispatcher $dispatcher) {
         $dispatcher->addListener(
-            OMV_NOTIFY_CREATE | OMV_NOTIFY_MODIFY | OMV_NOTIFY_DELETE,
+            OMV_NOTIFY_MODIFY,
             $this->getEventMessagePath(),
             array($this, "setDirty"));
     }
