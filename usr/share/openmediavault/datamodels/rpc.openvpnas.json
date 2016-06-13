@@ -1,0 +1,17 @@
+{
+	"type": "rpc",
+	"id": "rpc.openvpnas.setsettings",
+	"params": {
+		"type": "object",
+		"properties": {
+			"enable": {
+				"type": "boolean",
+				"required": true
+			},
+			"showtab": {
+				"type": "boolean",
+				"required": true
+			}
+		}
+	}
+}
