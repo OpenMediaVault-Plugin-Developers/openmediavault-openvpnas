@@ -20,7 +20,7 @@
 	"params": {
 		"type": "object",
 		"properties": {
-			"password": {
+			"admin_pass": {
 				"type": "string",
 				"required": true
 			}
