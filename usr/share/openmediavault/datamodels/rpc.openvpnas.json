@@ -16,7 +16,7 @@
 	}
 }, {
 	"type": "rpc",
-	"id": "rpc.openvpnas.doresetpassword",
+	"id": "rpc.openvpnas.dochangepassword",
 	"params": {
 		"type": "object",
 		"properties": {
