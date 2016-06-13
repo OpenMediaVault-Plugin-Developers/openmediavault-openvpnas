@@ -1,0 +1,19 @@
+{
+	"type": "config",
+	"id": "conf.service.openvpnas",
+	"title": "OpenVPN AS",
+	"queryinfo": {
+		"xpath": "//services/openvpnas",
+		"iterable": false
+	},
+	"properties": {
+		"enable": {
+			"type": "boolean",
+			"default": false
+		},
+		"showtab": {
+			"type": "boolean",
+			"default": false
+		}
+	}
+}
