@@ -19,6 +19,7 @@ namespace OMV\Engined\Rpc;
 
 use OMV\Config\Database;
 use OMV\Rpc\ServiceAbstract;
+
 class OpenVPNAS extends ServiceAbstract
 {
     /** @var Database */
