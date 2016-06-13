@@ -1,8 +1,6 @@
 <?php
 /**
- * @license   http://www.gnu.org/licenses/gpl.html GPL Version 3
- * @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
- * @copyright Copyright (C) 2014-2016 OpenMediaVault Plugin Developers
+ * Copyright (C) 2014-2016 OpenMediaVault Plugin Developers.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,125 +15,102 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-require_once "openmediavault/module.inc";
-require_once "openmediavault/config.inc";
-require_once "openmediavault/error.inc";
-require_once "openmediavault/util.inc";
-require_once "openmediavault/systemctl.inc";
-require_once "openmediavault/log.inc";
-
-class OMVModuleOpenVPNAS extends OMVModuleServiceAbstract
-    implements OMVINotifyListener, OMVIModuleServiceStatus
+namespace OMV\Engined\Module;
+use OMV\Config\Database;
+use OMV\Engine\Module\IServiceStatus;
+use OMV\Engine\Module\ServiceAbstract;
+use OMV\Engine\Notify\Dispatcher;
+use OMV\Engine\Notify\IListener;
+use OMV\System\Process;
+use OMV\System\SystemCtl;
+class OpenVPNAS extends ServiceAbstract implements
+    IListener,
+    IServiceStatus
 {
-    /* Helpers */
-
-    private function getEventMessagePath()
+    /** @var Database */
+    private $database;
+    /** @var string */
+    private $dataModelPath = 'conf.service.openvpnas';
+    /** @var string */
+    private $eventMessagePath = 'org.openmediavault.conf.service.openvpnas';
+    /** @var string */
+    private $serviceName = 'openvpnas.service';
+    public function __construct(Database $database = null)
     {
-        return "org.openmediavault.services.openvpnas";
+        $this->database = $database ?: Database::getInstance();
     }
-
-    private function getXPath()
-    {
-        return "/config/services/openvpnas";
-    }
-
-    /* /Helpers */
-
     /**
      * Get the module name.
+     *
+     * @return string
      */
     public function getName()
     {
-        return "openvpnas";
+        return 'openvpnas';
     }
-
     /**
-     * Get the status of the service
+     * Get the module status.
+     *
+     * @return array
      */
     public function getStatus()
     {
-        global $xmlConfig;
-
-        $object = $xmlConfig->get($this->getXPath());
-        if (is_null($object))
-            throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED, $this->getXPath());
-
-        $systemCtl = new OMVSystemCtl( $this->getName() );
+        $object = $this->database->get($this->dataModelPath);
+        $systemCtl = new SystemCtl($this->serviceName);
         return [
-            "name"    => $this->getName(),
-            "title"   => gettext("OpenVPN AS"),
-            "enabled" => boolval($object["enable"]),
-            "running" => $systemCtl->isActive(),
+            'name' => $this->getName(),
+            'title' => gettext('OpenVPN AS'),
+            'enabled' => $object->get('enable'),
+            'running' => $systemCtl->isActive(),
         ];
     }
-
     /**
-     * Create and update the configuration
+     * Generate the configuration.
+     *
+     * @return void
      */
     public function applyConfig()
     {
-        $cmd = sprintf("export LANG=C; omv-mkconf %s 2>&1", $this->getName());
-
-        if (0 !== $this->exec($cmd, $output))
-            throw new OMVException(OMVErrorMsg::E_EXEC_FAILED,
-                $cmd, implode(PHP_EOL, $output));
+        $cmd = new Process('omv-mkconf', 'openvpnas');
+        $cmd->setRedirect2to1();
+        $cmd->execute();
     }
-
     /**
-     * Start the service
+     * Start the managed service.
+     *
+     * @return void
      */
     public function startService()
     {
-        global $xmlConfig;
-
-        $object = $xmlConfig->get($this->getXPath());
-
-        if (is_null($object))
-            throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED,
-                $this->getXPath());
-
-        if (!$object["enable"])
-            return;
-
-        $systemCtl = new OMVSystemCtl($this->getName(), true);
-        $systemCtl->enable(true);
+        $object = $this->database->get($this->dataModelPath);
+        if ($object->get('enable')) {
+            $systemCtl = new SystemCtl($this->serviceName);
+            $systemCtl->enable(true);
+        }
     }
-
     /**
-     * Stop the service
+     * Stop the managed service.
+     *
+     * @return void
      */
     public function stopService()
     {
-        $systemCtl = new OMVSystemCtl($this->getName());
+        $systemCtl = new SystemCtl($this->serviceName);
         $systemCtl->disable(true);
     }
-
     /**
      * Bind listeners.
+     *
+     * @param Dispatcher $dispatcher The dispatcher object.
+     *
+     * @return void
      */
-    public function bindListeners(OMVNotifyDispatcher $dispatcher) {
+    public function bindListeners(Dispatcher $dispatcher)
+    {
         $dispatcher->addListener(
-            OMV_NOTIFY_MODIFY,
-            $this->getEventMessagePath(),
-            array($this, "setDirty"));
+            OMV_NOTIFY_CREATE | OMV_NOTIFY_MODIFY | OMV_NOTIFY_DELETE,
+            $this->eventMessagePath,
+            [$this, 'setDirty']
+        );
     }
 }
-
-// Register module
-$moduleMgr = &OMVModuleMgr::getInstance();
-$moduleMgr->registerModule(new OMVModuleOpenVPNAS());
-
-// Register new logfile type
-OMVLogFile::registerType("openvpnas", array(
-    "filename" => "openvpnas.log",
-    "filepath" => "/var/log/openvpnas.log",
-    "regex"    => "/^(\d+-\d+-\d+\s+\d+:\d+:\d+[-\+]\d+)\s+\[.*\]\s+(.*)$/",
-    "columns"  => array(
-        "date"  => array(
-            "index" => 1,
-            "func"  => create_function("\$v", "return strpdate(\$v, \"Y-m-d H:i:sO\");")
-        ),
-        "event" => 2
-    )
-));
