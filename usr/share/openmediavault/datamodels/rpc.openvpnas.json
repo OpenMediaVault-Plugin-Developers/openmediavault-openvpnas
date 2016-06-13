@@ -14,4 +14,16 @@
 			}
 		}
 	}
+}, {
+    "type": "rpc",
+    "id": "rpc.openvpnas.doresetpassword",
+    "params": {
+        "type": "object",
+        "properties": {
+            "password": {
+                "type": "string",
+                "required": true
+            }
+        }
+    }
 }
