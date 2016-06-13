@@ -86,7 +86,7 @@ class OpenVPNAS extends ServiceAbstract
         global $xmlConfig;
         // Validate the RPC caller context.
         $this->validateMethodContext($context, [ "role" => OMV_ROLE_ADMINISTRATOR ]);
-        $this->validateMethodParams($params, 'rpc.openvpnas.doresetpassword');
+        $this->validateMethodParams($params, 'rpc.openvpnas.dochangepassword');
 
         // create password file
         $file = "/tmp/.openmediavault-openvpnas-pwd";
