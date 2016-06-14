@@ -82,9 +82,8 @@ class OpenVPNAS extends ServiceAbstract
         return $object->getAssoc();
     }
     
-    public function doChangePassword($params, $context) {
-        global $xmlConfig;
-        // Validate the RPC caller context.
+    public function doChangePassword($params, $context)
+    {
         $this->validateMethodContext($context, [ "role" => OMV_ROLE_ADMINISTRATOR ]);
         $this->validateMethodParams($params, 'rpc.openvpnas.dochangepassword');
 
