@@ -17,8 +17,10 @@
  */
 namespace OMV\Engined\Rpc;
 
+use Exception;
 use OMV\Config\Database;
 use OMV\Rpc\ServiceAbstract;
+use OMV\System\Process;
 
 class OpenVPNAS extends ServiceAbstract
 {
@@ -94,6 +96,6 @@ class OpenVPNAS extends ServiceAbstract
         // change password
         $cmd = "/usr/sbin/change_openvpnas_pwd 2>&1";
         if(0 !== $this->exec($cmd, $output))
-            throw new OMVException(OMVErrorMsg::E_EXEC_FAILED, $cmd, implode(PHP_EOL, $output));
+            throw new Exception($cmd, implode(PHP_EOL, $output));
     } 
 }
