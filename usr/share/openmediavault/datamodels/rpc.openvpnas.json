@@ -1,4 +1,4 @@
-{
+[{
 	"type": "rpc",
 	"id": "rpc.openvpnas.setsettings",
 	"params": {
@@ -26,4 +26,4 @@
 			}
 		}
 	}
-}
+}]
