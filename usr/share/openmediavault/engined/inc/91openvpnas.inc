@@ -21,7 +21,7 @@ LogFileSpec::registerSpecification(
     'openvpnas',
     [
         'filename' => 'openvpnas.log',
-        'filepath' => '/var/log/cups/openvpnas.log',
+        'filepath' => '/var/log/openvpnas.log',
         'regex' => '/^(\d+-\d+-\d+\s+\d+:\d+:\d+[-\+]\d+)\s+\[.*\]\s+(.*)$/',
         'columns' => [
             'date' => [
