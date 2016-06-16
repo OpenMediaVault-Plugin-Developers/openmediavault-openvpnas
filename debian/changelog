@@ -1,3 +1,9 @@
+openmediavault-openvpnas (3.3) stable; urgency=low
+
+  * Fix log file errors 
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 16 Jun 2016 00:45:22 -0400
+
 openmediavault-openvpnas (3.2) stable; urgency=low
 
   * Update for datamodels.
@@ -73,4 +79,3 @@ openmediavault-openvpnas (1.0.2) unstable; urgency=low
   * Initial release
 
  -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 04 Apr 2014 15:07:27 -0500
-
