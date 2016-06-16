@@ -18,19 +18,17 @@
 use OMV\System\LogFileSpec;
 
 LogFileSpec::registerSpecification(
-    'openvpnas', array
+    'openvpnas',
     [
         'filename' => 'openvpnas.log',
         'filepath' => '/var/log/openvpnas.log',
         'regex' => '/^(\d+-\d+-\d+\s+\d+:\d+:\d+[-\+]\d+)\s+\[.*\]\s+(.*)$/',
         'columns' => [
-            'date' => array [
+            'date' => [
                 'index' => 1,
-                'func' => create_function ($v) {
+                'func' => function ($v) {
                     return strpdate($v, 'Y-m-d H:i:sO');
-                },
+                }
             ],
-            'event' => 2,
-        ],
-    ]
-);
+            'event' => 2
+]]);
